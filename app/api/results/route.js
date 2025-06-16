@@ -3,13 +3,12 @@ import axios from "axios";
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const accessToken = searchParams.get("accessToken");
-  // Remove semesterId, we will fetch only for semesters from the graph endpoint
-  // const semesterId = searchParams.get("semesterId");
 
-  // Use environment variables for configuration
-  const graphUrl = process.env.DIU_GRAPH_URL;
-  const resultUrlBase = process.env.DIU_RESULT_URL;
-  const studentPortalUrl = process.env.DIU_STUDENT_PORTAL_URL;
+  const graphUrl =
+    "https://gateway7.diu.edu.bd/api/student/portal/result/graph";
+  const resultUrlBase =
+    "https://gateway7.diu.edu.bd/api/student/portal/result/semester";
+  const studentPortalUrl = "https://studentportal.diu.edu.bd";
 
   try {
     // 1. Fetch the list of semesters and SGPA
@@ -51,6 +50,7 @@ export async function GET(request) {
           data: response.data,
         });
       } catch (err) {
+        console.error(`Error fetching semester ${semesterId}:`, err.message);
         semesterResults.push({
           semester: sem.semester,
           sgpa: sem.sgpa,
@@ -64,6 +64,7 @@ export async function GET(request) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.error("Results API error:", error.message);
     return new Response(
       JSON.stringify({ message: `Failed to fetch semester graph or results` }),
       { status: 500, headers: { "Content-Type": "application/json" } }

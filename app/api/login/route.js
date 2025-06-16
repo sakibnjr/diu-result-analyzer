@@ -4,9 +4,9 @@ export async function POST(request) {
   const body = await request.json();
   const { username, password } = body;
 
-  // Use environment variables for configuration
-  const authUrl = process.env.DIU_AUTH_URL;
-  const clientId = process.env.DIU_CLIENT_ID;
+  const authUrl =
+    "https://auth1.diu.edu.bd/realms/diu-student/protocol/openid-connect/token";
+  const clientId = "student-portal-ui";
 
   try {
     const response = await axios.post(
@@ -26,6 +26,7 @@ export async function POST(request) {
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (error) {
+    console.error("Login error:", error.message);
     return new Response(JSON.stringify({ message: "Authentication failed" }), {
       status: 401,
       headers: { "Content-Type": "application/json" },
