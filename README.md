@@ -4,7 +4,6 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://diu-result-analyzer.vercel.app)
 [![Made with Next.js](https://img.shields.io/badge/Made%20with-Next.js-black)](https://nextjs.org/)
-[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## 🔥 Features
 
@@ -83,7 +82,7 @@ npm run dev
 
 ### **Frontend**
 
-- ⚡ **Next.js 14** with App Router
+- ⚡ **Next.js 15.3.3** with App Router
 - 🎨 **Tailwind CSS** for responsive design
 - 📊 **Recharts** for data visualization
 - 📱 **Mobile-first** responsive design
@@ -173,7 +172,7 @@ We welcome contributions from the DIU community!
 ```bash
 # Fork the repository
 # Clone your fork
-git clone https://github.com/yourusername/diu-result-analyzer.git
+git clone https://github.com/sakibnjr/diu-result-analyzer.git
 
 # Create a feature branch
 git checkout -b feature/your-feature-name
@@ -191,10 +190,6 @@ git push origin feature/your-feature-name
 - 💻 **GitHub**: [github.com/sakibnjr/diu-result-analyzer](https://github.com/sakibnjr/diu-result-analyzer)
 - 📧 **Developer**: SakibNjr
 - 🐛 **Issues**: [GitHub Issues](https://github.com/sakibnjr/diu-result-analyzer/issues)
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 

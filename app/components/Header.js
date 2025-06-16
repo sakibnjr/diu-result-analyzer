@@ -92,11 +92,11 @@ export function Header({ isAuthenticated, handleLogout, loading }) {
           </div>
           {isAuthenticated ? (
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-              DIU Academic Dashboard
+              Academic Dashboard
             </h1>
           ) : (
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-              DIU CGPA Calculator
+              DIU Result Analyzer
             </h1>
           )}
         </div>
@@ -140,7 +140,7 @@ export function Header({ isAuthenticated, handleLogout, loading }) {
             <p className="text-sm text-gray-600 max-w-3xl mx-auto">
               Calculate your DIU CGPA, SGPA, analyze academic performance, and
               download professional transcripts. Compatible with all DIU
-              undergraduate programs and handles retaken courses automatically.
+              undergraduate programs.
             </p>
           </div>
 

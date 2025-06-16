@@ -1,10 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable experimental features for better SEO
-  experimental: {
-    optimizeCss: true,
-  },
-
   // Compress images for better page speed
   images: {
     formats: ["image/webp", "image/avif"],
