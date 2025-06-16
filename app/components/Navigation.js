@@ -90,9 +90,12 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                 </svg>
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-                  Project DAS
-                </h1>
+                <div className="flex flex-col items-start">
+                  <h1 className="text-xl uppercase tracking-tighter font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+                    Diu result analyzer
+                  </h1>
+                  <p className="text-xs">AcademicX-V2.0</p>
+                </div>
               </div>
             </button>
           </div>

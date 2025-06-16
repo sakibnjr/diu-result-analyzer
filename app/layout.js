@@ -48,16 +48,12 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical:
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      "https://diu-result-analyzer.vercel.app",
+    canonical: "https://diu-result-analyzer.vercel.app",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url:
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      "https://diu-result-analyzer.vercel.app",
+    url: "https://diu-result-analyzer.vercel.app",
     title: "DIU Result Analyzer - Free CGPA Calculator for DIU Students",
     description:
       "Calculate your DIU CGPA, SGPA, and analyze academic performance with our free result analyzer for Daffodil International University students.",
@@ -100,9 +96,7 @@ const structuredData = {
   name: "DIU Result Analyzer",
   description:
     "Free CGPA and SGPA calculator for Daffodil International University students with academic result analysis and transcript generation.",
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://diu-result-analyzer.vercel.app",
+  url: "https://diu-result-analyzer.vercel.app",
   applicationCategory: "EducationalApplication",
   operatingSystem: "Web Browser",
   offers: {
