@@ -2,19 +2,65 @@
   "name": "academicx2v",
   "version": "0.1.0",
   "private": true,
+  "description": "Free DIU CGPA Calculator and Academic Result Analyzer for Daffodil International University Students",
+  "keywords": [
+    "DIU CGPA calculator",
+    "DIU SGPA calculator",
+    "Daffodil International University",
+    "DIU result analyzer",
+    "Bangladesh university CGPA",
+    "DIU grade calculator",
+    "academic dashboard",
+    "Next.js education app"
+  ],
+  "author": {
+    "name": "SakibNjr",
+    "url": "https://github.com/sakibnjr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sakibnjr/diu-result-analyzer.git"
+  },
+  "homepage": "https://diu-result-analyzer.vercel.app",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true npm run build",
+    "lighthouse": "lighthouse http://localhost:3000 --output html --output-path ./lighthouse-report.html --view",
+    "seo-test": "npm run build && npm run start & sleep 5 && npm run lighthouse",
+    "export": "next export",
+    "type-check": "next lint"
   },
   "dependencies": {
+    "axios": "^1.10.0",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
+    "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.3"
+    "recharts": "^2.15.3"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^15.3.3",
     "@tailwindcss/postcss": "^4",
+    "lighthouse": "^12.6.1",
     "tailwindcss": "^4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

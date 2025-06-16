@@ -1,0 +1,46 @@
+{
+  "name": "DIU Result Analyzer - CGPA Calculator for Daffodil International University",
+  "short_name": "DIU CGPA Calculator",
+  "description": "Free DIU CGPA and SGPA calculator with academic result analysis for Daffodil International University students. Calculate grades, view transcripts, and track academic performance.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#2563eb",
+  "background_color": "#f8fafc",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["education", "productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Calculate CGPA",
+      "short_name": "CGPA",
+      "description": "Login and calculate your DIU CGPA instantly",
+      "url": "/",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "View Results",
+      "short_name": "Results",
+      "description": "View detailed semester results and grades",
+      "url": "/",
+      "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
