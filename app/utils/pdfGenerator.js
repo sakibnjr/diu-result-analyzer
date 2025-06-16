@@ -6,7 +6,6 @@ import {
   getTotalCredits,
   getTotalCourses,
   getStudentInfo,
-  getUniqueCoursesWithHighestGrades,
 } from "./helpers";
 
 export function generatePDFTranscript(results) {
@@ -15,7 +14,6 @@ export function generatePDFTranscript(results) {
 
   // Get data
   const allCourses = getAllCourses(results);
-  const uniqueCourses = getUniqueCoursesWithHighestGrades(allCourses);
   const studentInfo = getStudentInfo(results);
   const overallCGPA = calculateCGPA(allCourses);
   const totalCredits = getTotalCredits(allCourses);

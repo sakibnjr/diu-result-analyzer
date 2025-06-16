@@ -12,22 +12,20 @@ export function LoginForm({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="md:w-4/5 md:mx-auto">
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 space-y-6">
-        <div className="text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-2">
+    <div className="max-w-md mx-auto">
+      <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-200">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Student Login
           </h2>
-          <p className="text-gray-600 text-sm">
-            Use your DIU student ID and password to login.
-          </p>
+          <p className="text-gray-600 text-sm">Enter your DIU credentials</p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div className="space-y-1">
+        <form onSubmit={handleLogin} className="space-y-5">
+          <div>
             <label
               htmlFor="username"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 mb-2"
             >
               Student ID
             </label>
@@ -39,11 +37,11 @@ export function LoginForm({
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="XXX-XX-XXXX"
                 required
-                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition-all duration-150"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
               />
               <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                 <svg
-                  className="w-4 h-4 text-gray-400"
+                  className="w-5 h-5 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -59,10 +57,10 @@ export function LoginForm({
             </div>
           </div>
 
-          <div className="space-y-1">
+          <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 mb-2"
             >
               Password
             </label>
@@ -71,19 +69,19 @@ export function LoginForm({
                 type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
-                placeholder="********"
+                placeholder="Enter your password"
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 pr-10 bg-white border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition-all duration-150"
+                className="w-full px-4 py-3 pr-12 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 flex items-center pr-3 hover:text-gray-600 transition-colors duration-150"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 hover:text-gray-600 transition-colors duration-200"
               >
                 {showPassword ? (
                   <svg
-                    className="w-4 h-4 text-gray-400"
+                    className="w-5 h-5 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -97,7 +95,7 @@ export function LoginForm({
                   </svg>
                 ) : (
                   <svg
-                    className="w-4 h-4 text-gray-400"
+                    className="w-5 h-5 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -123,12 +121,12 @@ export function LoginForm({
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 px-6 rounded-lg shadow hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 disabled:cursor-not-allowed"
           >
             {loading ? (
               <div className="flex items-center justify-center">
                 <svg
-                  className="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -150,15 +148,15 @@ export function LoginForm({
                 Signing In...
               </div>
             ) : (
-              <span>Sign In</span>
+              "Sign In"
             )}
           </button>
         </form>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
+          <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
             <svg
-              className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0"
+              className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -176,6 +174,34 @@ export function LoginForm({
             </div>
           </div>
         )}
+
+        {/* Security Note */}
+        <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="flex items-center gap-3">
+            <svg
+              className="w-5 h-5 text-green-600 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              />
+            </svg>
+            <div>
+              <h3 className="font-semibold text-green-800 text-sm">
+                Secure Login
+              </h3>
+              <p className="text-xs text-green-700 mt-1">
+                Uses official DIU portal authentication. No data stored on our
+                servers.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

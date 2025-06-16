@@ -5,18 +5,20 @@ export async function GET(request) {
   const accessToken = searchParams.get("accessToken");
   // Remove semesterId, we will fetch only for semesters from the graph endpoint
   // const semesterId = searchParams.get("semesterId");
-  const graphUrl =
-    "https://gateway7.diu.edu.bd/api/student/portal/result/graph";
-  const resultUrlBase =
-    "https://gateway7.diu.edu.bd/api/student/portal/result/semester";
+
+  // Use environment variables for configuration
+  const graphUrl = process.env.DIU_GRAPH_URL;
+  const resultUrlBase = process.env.DIU_RESULT_URL;
+  const studentPortalUrl = process.env.DIU_STUDENT_PORTAL_URL;
+
   try {
     // 1. Fetch the list of semesters and SGPA
     const graphResponse = await axios.get(graphUrl, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         Accept: "application/json",
-        Origin: "https://studentportal.diu.edu.bd",
-        Referer: "https://studentportal.diu.edu.bd/",
+        Origin: studentPortalUrl,
+        Referer: `${studentPortalUrl}/`,
       },
     });
     const semesters = graphResponse.data;
@@ -37,8 +39,8 @@ export async function GET(request) {
             headers: {
               Authorization: `Bearer ${accessToken}`,
               Accept: "application/json",
-              Origin: "https://studentportal.diu.edu.bd",
-              Referer: "https://studentportal.diu.edu.bd/",
+              Origin: studentPortalUrl,
+              Referer: `${studentPortalUrl}/`,
             },
           }
         );

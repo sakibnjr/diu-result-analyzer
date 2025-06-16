@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { HeroStatistics } from "./HeroStatistics";
 import { StudentInfoCard } from "./StudentInfoCard";
 import { PerformanceChart } from "./PerformanceChart";
@@ -17,7 +19,9 @@ export function Dashboard({
   expandedSemester,
   setExpandedSemester,
 }) {
-  // Calculate summary values
+  const router = useRouter();
+
+  // Calculate summary values (use original results for main dashboard)
   const allCourses = getAllCourses(results);
   const overallCGPA = calculateCGPA(allCourses);
   const totalSemesters = results.filter(
@@ -75,8 +79,8 @@ export function Dashboard({
         getTotalCourses={getTotalCourses}
       />
 
-      {/* Download PDF Button */}
-      <div className="flex justify-center pt-4">
+      {/* PDF Download Action */}
+      <div className="flex justify-center">
         <button
           onClick={handleDownloadPDF}
           disabled={loading || !results.length}
@@ -95,7 +99,8 @@ export function Dashboard({
               d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
             />
           </svg>
-          Download Complete Transcript
+          Download Transcript
+          <span className="text-xs opacity-75">PDF Format</span>
         </button>
       </div>
     </div>
