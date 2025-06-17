@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
 export function LoginForm({
   username,
@@ -10,6 +11,22 @@ export function LoginForm({
   error,
 }) {
   const [showPassword, setShowPassword] = useState(false);
+
+  // Show error toast when error changes
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        duration: 4000,
+        position: "top-center",
+        style: {
+          background: "#fef2f2",
+          color: "#991b1b",
+          border: "1px solid #fecaca",
+        },
+        icon: "❌",
+      });
+    }
+  }, [error]);
 
   return (
     <div className="max-w-md mx-auto">
@@ -152,28 +169,6 @@ export function LoginForm({
             )}
           </button>
         </form>
-
-        {error && (
-          <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
-            <svg
-              className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <div>
-              <h4 className="text-sm font-medium text-red-800">Login Failed</h4>
-              <p className="text-sm text-red-600 mt-1">{error}</p>
-            </div>
-          </div>
-        )}
 
         {/* Security Note */}
         <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">

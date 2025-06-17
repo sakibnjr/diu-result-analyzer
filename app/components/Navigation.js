@@ -50,6 +50,27 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
       description: "Search and filter courses",
       requiresAuth: true,
     },
+    {
+      name: "CGPA Calculator",
+      href: "/calculator",
+      icon: (
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+          />
+        </svg>
+      ),
+      description: "Calculate CGPA manually",
+      requiresAuth: false,
+    },
   ];
 
   const handleNavigation = (href) => {
@@ -66,7 +87,7 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
 
   return (
     <nav className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-2">
         <div className="flex justify-between h-16">
           {/* Logo and Brand */}
           <div className="flex items-center">

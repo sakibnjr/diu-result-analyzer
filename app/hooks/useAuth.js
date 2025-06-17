@@ -9,24 +9,34 @@ export function useAuth() {
 
   // Load authentication state from localStorage on component mount
   useEffect(() => {
-    try {
-      // Check if localStorage is available (client-side)
-      if (typeof window !== "undefined" && window.localStorage) {
-        const savedToken = localStorage.getItem("diu_access_token");
-        const savedUsername = localStorage.getItem("diu_username");
+    const loadAuthState = async () => {
+      // Reduced delay for faster auth loading
+      const minDelay = new Promise((resolve) => setTimeout(resolve, 100));
 
-        if (savedToken) {
-          setAccessToken(savedToken);
+      try {
+        // Check if localStorage is available (client-side)
+        if (typeof window !== "undefined" && window.localStorage) {
+          const savedToken = localStorage.getItem("diu_access_token");
+          const savedUsername = localStorage.getItem("diu_username");
+
+          if (savedToken) {
+            setAccessToken(savedToken);
+          }
+          if (savedUsername) {
+            setUsername(savedUsername);
+          }
         }
-        if (savedUsername) {
-          setUsername(savedUsername);
-        }
+      } catch (error) {
+        console.error("Error loading auth state from localStorage:", error);
       }
-    } catch (error) {
-      console.error("Error loading auth state from localStorage:", error);
-    } finally {
+
+      // Wait for minimum delay before completing auth load
+      await minDelay;
+
       setLoading(false);
-    }
+    };
+
+    loadAuthState();
   }, []);
 
   const handleLogin = async (e) => {

@@ -60,43 +60,8 @@ export default function FilterPage() {
         loading={false}
       />
 
-      <div className="flex-1 flex flex-col py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col space-y-8">
-          {/* Page Title */}
-          <div className="text-center space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              Advanced Result Filter
-            </h1>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Filter and search through your academic results with advanced
-              criteria. Find specific courses, grades, and semesters that match
-              your requirements.
-            </p>
-
-            {/* Navigation */}
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={() => router.push("/")}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-sm rounded-lg transition-colors"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-                Back to Dashboard
-              </button>
-            </div>
-          </div>
-
+      <div className="flex-1 flex flex-col p-2">
+        <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col">
           {/* Filter Component */}
           <ResultFilter
             results={resultsData.results}
