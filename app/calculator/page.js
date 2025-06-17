@@ -98,13 +98,13 @@ export default function CalculatorPage() {
 
         {/* Main Content */}
         <div className="flex-1 py-4 sm:py-6 lg:py-8">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto px-2 md:px-0">
             {/* Page Header */}
             <div className="text-center mb-8">
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">
                 Manual CGPA Calculator
               </h1>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-gray-600">
                 Calculate your semester CGPA by adding courses manually
                 {auth.accessToken && overallCGPA
                   ? ", then see how it affects your overall academic standing."

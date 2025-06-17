@@ -62,6 +62,17 @@ export default function FilterPage() {
 
       <div className="flex-1 flex flex-col p-2">
         <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col">
+          {/* Welcome Message */}
+          <div className="text-center mb-6 p-4">
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+              Filter Your Results
+            </h1>
+            <p className="text-gray-600">
+              Use the filters below to find specific courses and monitor your
+              academic history.
+            </p>
+          </div>
+
           {/* Filter Component */}
           <ResultFilter
             results={resultsData.results}

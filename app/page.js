@@ -7,11 +7,9 @@ import { Footer } from "./components/Footer";
 import { useAuth } from "./hooks/useAuth";
 import { useResults } from "./hooks/useResults";
 import { Toaster } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 export default function AcademicDashboard() {
   const [expandedSemester, setExpandedSemester] = useState(null);
-  const router = useRouter();
 
   // Custom hooks for auth and results
   const auth = useAuth();
@@ -111,16 +109,12 @@ export default function AcademicDashboard() {
                           Academic Performance Analyzer
                         </div>
 
-                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
+                        <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
                           DIU Result Analyzer
                         </h1>
 
                         {/* Description - Simplified on mobile */}
                         <p className="text-sm sm:text-base lg:text-xl text-gray-600 leading-relaxed max-w-2xl">
-                          <span className="sm:hidden">
-                            Calculate CGPA and analyze your DIU academic
-                            performance.
-                          </span>
                           <span className="hidden sm:block">
                             Transform your academic data into actionable
                             insights with our comprehensive CGPA calculator and

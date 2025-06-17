@@ -47,7 +47,7 @@ export function Dashboard({
   };
 
   return (
-    <div className="space-y-6 sm:space-y-8 relative max-w-7xl mx-auto px-2 md:px-0">
+    <div className="space-y-6 sm:space-y-8 relative max-w-7xl mx-auto px-2 md:px-0 overflow-x-hidden">
       {/* Animated background particles */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-30">
         <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400/20 rounded-full animate-float-slow"></div>
