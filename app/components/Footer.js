@@ -6,7 +6,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-3">
           <p className="text-sm text-gray-700 font-medium">
-            &copy; {currentYear} DIU Result Analyzer
+            &copy; {currentYear} AcademicX Version 2.0
           </p>
           <p className="text-xs text-gray-600">
             Made with <span className="text-red-500 animate-pulse">❤️</span> for

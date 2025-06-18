@@ -1,7 +1,7 @@
 import { useState, useEffect, forwardRef } from "react";
 import toast from "react-hot-toast";
 import {
-  MdLock,
+  MdDashboard,
   MdPerson,
   MdVisibility,
   MdVisibilityOff,
@@ -43,14 +43,14 @@ export const LoginForm = forwardRef(function LoginForm(
         <div className="text-center mb-8">
           {/* Icon */}
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-2xl mb-4 border border-blue-200">
-            <MdLock className="w-8 h-8 text-blue-600" />
+            <MdDashboard className="w-8 h-8 text-blue-600" />
           </div>
 
           <h2 className="text-3xl font-bold mb-2 text-gray-900">
             Welcome Back
           </h2>
           <p className="text-gray-600 text-sm">
-            Access your academic dashboard
+            Login with your DIU credentials
           </p>
         </div>
 
