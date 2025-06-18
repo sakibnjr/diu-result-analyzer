@@ -2,7 +2,12 @@
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
-export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
+export function Navigation({
+  isAuthenticated,
+  handleLogout,
+  loading = false,
+  onLoginClick,
+}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -86,16 +91,16 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
   };
 
   return (
-    <nav className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-2">
-        <div className="flex justify-between h-16">
+    <nav className="bg-white/90 backdrop-blur-md border-b border-gray-200/50 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-2 md:px-0">
+        <div className="flex justify-between items-center h-16">
           {/* Logo and Brand */}
-          <div className="flex items-center">
+          <div className="flex items-center flex-shrink-0">
             <button
               onClick={() => handleNavigation("/")}
               className="flex items-center space-x-3 group"
             >
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                 <svg
                   className="w-6 h-6 text-white"
                   fill="none"
@@ -112,18 +117,18 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
               </div>
               <div className="hidden sm:block">
                 <div className="flex flex-col items-start">
-                  <h1 className="text-xl uppercase tracking-tighter font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+                  <h1 className="text-xl uppercase tracking-tighter font-bold text-gray-900">
                     Diu result analyzer
                   </h1>
-                  <p className="text-xs">AcademicX-V2.0</p>
+                  <p className="text-xs text-gray-600">AcademicX-V2.0</p>
                 </div>
               </div>
             </button>
           </div>
 
-          {/* Desktop Navigation */}
-          {isAuthenticated && (
-            <div className="hidden md:flex items-center space-x-1">
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex items-center justify-center flex-1 px-8">
+            <div className="flex items-center space-x-1">
               {navigationItems
                 .filter((item) => !item.requiresAuth || isAuthenticated)
                 .map((item) => (
@@ -131,11 +136,11 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                     key={item.name}
                     onClick={() => handleNavigation(item.href)}
                     className={`
-                      group flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
+                      group flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 backdrop-blur-sm
                       ${
                         isActiveRoute(item.href)
-                          ? "bg-blue-100 text-blue-700 border border-blue-200"
-                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                          ? "bg-blue-100 text-blue-700 border border-blue-200 shadow-sm"
+                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 border border-transparent hover:border-gray-200"
                       }
                     `}
                   >
@@ -143,7 +148,7 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                       className={`mr-2 ${
                         isActiveRoute(item.href)
                           ? "text-blue-600"
-                          : "text-gray-400 group-hover:text-gray-600"
+                          : "text-gray-400 group-hover:text-blue-600"
                       }`}
                     >
                       {item.icon}
@@ -152,15 +157,15 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                   </button>
                 ))}
             </div>
-          )}
+          </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center flex-shrink-0">
             {isAuthenticated ? (
               <div className="flex items-center space-x-3">
                 {/* User Menu */}
-                <div className="flex items-center space-x-2 px-3 py-2 bg-gray-50 rounded-lg">
-                  <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                <div className="flex items-center space-x-2 px-2 py-1 bg-gray-50 border border-gray-200 rounded-lg">
+                  <div className="w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center">
                     <svg
                       className="w-4 h-4 text-white"
                       fill="none"
@@ -175,7 +180,7 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                       />
                     </svg>
                   </div>
-                  <span className="text-sm font-medium text-gray-700">
+                  <span className="text-sm font-medium text-gray-900">
                     Student
                   </span>
                 </div>
@@ -184,7 +189,7 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                 <button
                   onClick={handleLogout}
                   disabled={loading}
-                  className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-red-400 transition-all duration-200 disabled:opacity-50"
+                  className="inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-red-50 hover:text-red-700 hover:border-red-300 transition-colors duration-200 disabled:opacity-50"
                 >
                   <svg
                     className="w-4 h-4 mr-2"
@@ -203,9 +208,25 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                 </button>
               </div>
             ) : (
-              <div className="text-sm text-gray-600">
-                Please log in to access your academic data
-              </div>
+              <button
+                onClick={onLoginClick}
+                className="inline-flex items-center px-4 py-2 border border-blue-200 text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-purple-600 backdrop-blur-sm hover:from-blue-700 hover:to-purple-700 hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+              >
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  />
+                </svg>
+                Login
+              </button>
             )}
           </div>
 
@@ -213,7 +234,7 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors border border-gray-200 backdrop-blur-sm"
             >
               <svg
                 className="w-6 h-6"
@@ -245,7 +266,35 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
       {/* Mobile Navigation Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-gray-200 bg-white">
-          <div className="px-4 pt-2 pb-4 space-y-2">
+          <div className="px-4 pt-2 pb-4 space-y-1">
+            {/* Mobile Login Section - Show prominently at top if not authenticated */}
+            {!isAuthenticated && (
+              <div className="pb-4 mb-4 border-b border-gray-200">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onLoginClick?.();
+                  }}
+                  className="w-full inline-flex items-center justify-center px-4 py-3 text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-colors duration-200 shadow-sm"
+                >
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    />
+                  </svg>
+                  Login to Access Dashboard
+                </button>
+              </div>
+            )}
+
             {/* Navigation Items */}
             {navigationItems
               .filter((item) => !item.requiresAuth || isAuthenticated)
@@ -254,11 +303,11 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                   key={item.name}
                   onClick={() => handleNavigation(item.href)}
                   className={`
-                    w-full group flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200
+                    w-full group flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-colors duration-200
                     ${
                       isActiveRoute(item.href)
-                        ? "bg-blue-100 text-blue-700 border border-blue-200"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                        ? "bg-blue-50 text-blue-700 border border-blue-200"
+                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                     }
                   `}
                 >
@@ -266,7 +315,7 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                     className={`mr-3 ${
                       isActiveRoute(item.href)
                         ? "text-blue-600"
-                        : "text-gray-400"
+                        : "text-gray-400 group-hover:text-gray-600"
                     }`}
                   >
                     {item.icon}
@@ -285,7 +334,7 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
               <div className="pt-4 mt-4 border-t border-gray-200">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
                       <svg
                         className="w-5 h-5 text-white"
                         fill="none"
@@ -304,7 +353,7 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                       <div className="font-medium text-gray-900">
                         Student Portal
                       </div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-gray-600">
                         Academic Dashboard
                       </div>
                     </div>
@@ -313,7 +362,7 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                   <button
                     onClick={handleLogout}
                     disabled={loading}
-                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors disabled:opacity-50"
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-red-50 hover:text-red-700 hover:border-red-300 transition-colors disabled:opacity-50"
                   >
                     <svg
                       className="w-4 h-4 mr-2"
@@ -330,17 +379,6 @@ export function Navigation({ isAuthenticated, handleLogout, loading = false }) {
                     </svg>
                     Logout
                   </button>
-                </div>
-              </div>
-            )}
-
-            {/* Mobile Non-Authenticated Message */}
-            {!isAuthenticated && (
-              <div className="pt-4 mt-4 border-t border-gray-200">
-                <div className="text-center p-3 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-700">
-                    Please log in to access your academic data
-                  </p>
                 </div>
               </div>
             )}

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { LoginForm } from "./components/LoginForm";
 import { Dashboard } from "./components/Dashboard";
 import { Navigation } from "./components/Navigation";
@@ -7,9 +7,16 @@ import { Footer } from "./components/Footer";
 import { useAuth } from "./hooks/useAuth";
 import { useResults } from "./hooks/useResults";
 import { Toaster } from "react-hot-toast";
+import {
+  MdAnalytics,
+  MdFilterList,
+  MdPictureAsPdf,
+  MdVerified,
+} from "react-icons/md";
 
 export default function AcademicDashboard() {
   const [expandedSemester, setExpandedSemester] = useState(null);
+  const loginFormRef = useRef(null);
 
   // Custom hooks for auth and results
   const auth = useAuth();
@@ -22,6 +29,23 @@ export default function AcademicDashboard() {
       await resultsData.fetchResults(token);
     } catch (error) {
       console.error("Error logging in:", error);
+    }
+  };
+
+  // Handle login button click from navigation
+  const handleLoginClick = () => {
+    if (loginFormRef.current) {
+      loginFormRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+      // Focus the username input after a short delay to allow scrolling
+      setTimeout(() => {
+        const usernameInput = document.getElementById("username");
+        if (usernameInput) {
+          usernameInput.focus();
+        }
+      }, 500);
     }
   };
 
@@ -72,143 +96,130 @@ export default function AcademicDashboard() {
         </p>
       </div>
 
-      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50/30 flex flex-col">
+      <main className="min-h-screen relative flex flex-col">
+        {/* Simplified Background */}
+        <div className="absolute inset-0 bg-gray-50">
+          {/* Subtle pattern overlay */}
+          <div
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.4'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
+        </div>
+
         {/* Navigation */}
         <Navigation
           isAuthenticated={!!auth.accessToken}
           handleLogout={handleLogout}
           loading={auth.loading || resultsData.loading}
+          onLoginClick={handleLoginClick}
         />
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col relative">
           {!auth.accessToken ? (
-            /* Landing Page Layout */
-            <div className="flex-1 flex flex-col">
-              {/* Hero Section */}
-              <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-                <div className="max-w-7xl mx-auto w-full">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 xl:gap-20 items-center">
-                    {/* Left Column - Hero Content */}
-                    <div className="text-center lg:text-left space-y-4 sm:space-y-6 lg:space-y-8">
-                      {/* Main Heading */}
-                      <div className="space-y-3 sm:space-y-4">
-                        {/* Badge - Hidden on mobile for cleaner look */}
-                        <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 bg-blue-100/80 text-blue-700 text-xs sm:text-sm font-medium rounded-full mb-4">
-                          <svg
-                            className="w-4 h-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          Academic Performance Analyzer
-                        </div>
-
-                        <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
-                          DIU Result Analyzer
-                        </h1>
-
-                        {/* Description - Simplified on mobile */}
-                        <p className="text-sm sm:text-base lg:text-xl text-gray-600 leading-relaxed max-w-2xl">
-                          <span className="hidden sm:block">
-                            Transform your academic data into actionable
-                            insights with our comprehensive CGPA calculator and
-                            performance analyzer.
-                          </span>
-                        </p>
-                      </div>
-
-                      {/* Feature Highlights - Simplified on mobile */}
-                      <div className="hidden md:grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-2 sm:pt-4">
-                        <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600">
-                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                            <svg
-                              className="w-3 h-3 sm:w-4 sm:h-4 text-green-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                          </div>
-                          <span>
-                            <span className="hidden sm:inline">
-                              Accurate CGPA
-                            </span>
-                          </span>
-                        </div>
-
-                        <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600">
-                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <svg
-                              className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"
-                              />
-                            </svg>
-                          </div>
-                          <span>
-                            <span className="hidden sm:inline">
-                              Smart Filters
-                            </span>
-                          </span>
-                        </div>
-
-                        <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600">
-                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <svg
-                              className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                              />
-                            </svg>
-                          </div>
-                          <span>
-                            <span className="hidden sm:inline">
-                              PDF Reports
-                            </span>
-                          </span>
-                        </div>
-                      </div>
+            /* Modern Landing Page Layout */
+            <div className="flex-1 flex items-center justify-center px-2 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8">
+              <div className="max-w-7xl mx-auto w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+                  {/* Left Column - Clean Hero Content */}
+                  <div className="text-center lg:text-left space-y-8">
+                    {/* Simple badge */}
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 text-gray-700 text-sm font-medium rounded-full shadow-sm">
+                      <MdVerified className="w-4 h-4 text-blue-600" />
+                      <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold">
+                        Next-Gen Academic Insights
+                      </span>
                     </div>
 
-                    {/* Right Column - Login Form */}
-                    <div className="flex justify-center lg:justify-end">
-                      <div className="w-full max-w-sm sm:max-w-md">
-                        <LoginForm
-                          username={auth.username}
-                          setUsername={auth.setUsername}
-                          password={auth.password}
-                          setPassword={auth.setPassword}
-                          handleLogin={handleLogin}
-                          loading={auth.loading}
-                          error={auth.error}
-                        />
-                      </div>
+                    {/* Clean heading */}
+                    <div className="space-y-6">
+                      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
+                        DIU Result
+                        <br />
+                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                          Analyzer
+                        </span>
+                      </h1>
+
+                      <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
+                        Complete DIU academic analytics in one place. View
+                        <span className="text-blue-600 font-semibold">
+                          {" "}
+                          CGPA, semester details
+                        </span>
+                        , filter courses, and export
+                        <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-semibold">
+                          {" "}
+                          professional PDFs
+                        </span>
+                        .
+                      </p>
+                    </div>
+
+                    {/* Simplified feature highlights */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8">
+                      {[
+                        {
+                          icon: (
+                            <MdAnalytics className="w-8 h-8 text-blue-600" />
+                          ),
+                          title: "Analytics",
+                          desc: "CGPA & academic insights",
+                          gradient:
+                            "from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200",
+                        },
+                        {
+                          icon: (
+                            <MdFilterList className="w-8 h-8 text-purple-600" />
+                          ),
+                          title: "Filtering",
+                          desc: "Search & filter courses",
+                          gradient:
+                            "from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200",
+                        },
+                        {
+                          icon: (
+                            <MdPictureAsPdf className="w-8 h-8 text-pink-600" />
+                          ),
+                          title: "PDF Export",
+                          desc: "Download reports",
+                          gradient:
+                            "from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200",
+                        },
+                      ].map((feature, index) => (
+                        <div
+                          key={index}
+                          className={`p-4 bg-gradient-to-br ${feature.gradient} border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 group cursor-pointer`}
+                        >
+                          <div className="mb-3 group-hover:scale-110 transition-transform duration-200">
+                            {feature.icon}
+                          </div>
+                          <h3 className="text-gray-900 font-semibold text-base mb-2">
+                            {feature.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm">
+                            {feature.desc}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Column - Login Form */}
+                  <div className="flex justify-center lg:justify-end">
+                    <div className="w-full max-w-md">
+                      <LoginForm
+                        username={auth.username}
+                        setUsername={auth.setUsername}
+                        password={auth.password}
+                        setPassword={auth.setPassword}
+                        handleLogin={handleLogin}
+                        loading={auth.loading}
+                        error={auth.error}
+                        ref={loginFormRef}
+                      />
                     </div>
                   </div>
                 </div>
@@ -216,7 +227,7 @@ export default function AcademicDashboard() {
             </div>
           ) : (
             /* Dashboard Layout */
-            <div className="flex-1">
+            <div className="flex-1 relative z-20">
               <Dashboard
                 results={resultsData.results}
                 loading={resultsData.loading}
